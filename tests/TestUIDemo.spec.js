@@ -1,18 +1,21 @@
 const { test, expect } = require('@playwright/test');// 'require()' is used to import modules and @playwright is an annotation to import libraries  
 
-test('Browser Context Playwright test', async ({ browser }) =>//can also be written as async function()
+test.only('Browser Context Playwright test', async ({ browser }) =>//can also be written as async function()
 {
     const context = await browser.newContext();  // helps to open a browser without any initial cookies. Creates an instance of the browser 
     const page = await context.newPage();
 
-    page.route('**/*.{css,jpg,jpeg,png}', route => route.abort()); // **/* represents any urlbefore and after slash and abort blocks the api requests
-        
+    // page.route('**/*.{css,jpg,jpeg,png}', route => route.abort()); // **/* represents any urlbefore and after slash and abort blocks the api requests
+
 
     const username = page.locator("input#username");
     const password = page.locator("input#password");
     const submit = page.locator("input[name = 'signin']");
     const errorMessage = page.locator("[style*='block']");
     const cardTitles = page.locator('.card-body a');
+
+    page.on('request', request => console.log(request.failure()));
+    page.on('response', response => console.log(response.allHeaders(), response.status()));
 
 
     await page.goto("https://rahulshettyacademy.com/loginpagePractice/");
@@ -99,11 +102,11 @@ test("Child window handle", async function ({ browser }) {
     const arrayText = (await newPage.locator("strong a").textContent()).split("@");
     const email = arrayText[1];
     console.log(text);
-    console.log("Your email is : "+ email);
+    console.log("Your email is : " + email);
     await username.fill(email);
     await page.pause();
 
-    
+
 
 });
 
