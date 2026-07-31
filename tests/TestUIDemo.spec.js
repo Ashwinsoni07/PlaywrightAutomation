@@ -5,6 +5,9 @@ test('Browser Context Playwright test', async ({ browser }) =>//can also be writ
     const context = await browser.newContext();  // helps to open a browser without any initial cookies. Creates an instance of the browser 
     const page = await context.newPage();
 
+    page.route('**/*.{css,jpg,jpeg,png}', route => route.abort()); // **/* represents any urlbefore and after slash and abort blocks the api requests
+        
+
     const username = page.locator("input#username");
     const password = page.locator("input#password");
     const submit = page.locator("input[name = 'signin']");
