@@ -24,7 +24,7 @@ async function excelTest() {
     const worksheet = workbook.getWorksheet('Sheet1');
     worksheet.eachRow((row, rowNumber) => {
         row.eachCell((cell, colNumber) => {/**Iterating through each row and cell */
-            if (cell.value === "Apple") {
+            if (cell.value === "iphone") {
 
                 output.row = rowNumber;
                 output.column = colNumber;
@@ -36,7 +36,7 @@ async function excelTest() {
     });
 
     const cell = worksheet.getCell(output.row, output.column);
-    cell.value = "iphone";
+    cell.value = "Samsung";
     await workbook.xlsx.writeFile("D:/Development/TestProject/dummyTestFile.xlsx");
 
 }
