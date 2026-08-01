@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');// 'require()' is used to import modules and @playwright is an annotation to import libraries  
 
-test.only('Browser Context Playwright test', async ({ browser }) =>//can also be written as async function()
+test('Browser Context Playwright test', async ({ browser }) =>//can also be written as async function()
 {
     const context = await browser.newContext();  // helps to open a browser without any initial cookies. Creates an instance of the browser 
     const page = await context.newPage();
