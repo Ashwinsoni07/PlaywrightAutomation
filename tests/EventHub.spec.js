@@ -15,6 +15,7 @@ function setEventDate(daysToEvent = 7) {
     const hours = "18";
     const minutes = "00";
 
+    console.log(month, day);
     return `${day}-${month}-${year}T${hours}:${minutes}`;
 }
 async function loginFunction(page) {

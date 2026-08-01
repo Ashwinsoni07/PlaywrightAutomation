@@ -14,7 +14,7 @@ const config = ({
   reporter : 'html',
   use: {
     browserName : 'chromium',
-    headless : false, // when false opens browser
+    headless : true, // when false opens browser
     screenshot : 'on', //takes screenshot at every step
     trace : 'on',//'retain-on-failure', // Takes log for every step - helps in debugging displays traces only on failures
     
