@@ -15,7 +15,7 @@ test('API request intercept Securty', async ({ page }) => {
 
     //login and reach orders page
     await page.route("https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=*",
-        async route => 
+         route => 
             route.continue({ url: 'https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=6a6b911285b8849b491dc8b3' }));
     /* Continue helps intercepting the API request */
 
