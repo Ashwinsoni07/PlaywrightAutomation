@@ -3,6 +3,9 @@
 // Test1234
 const { test, expect } = require('@playwright/test');
 import { PageObjectManager } from '../tests/pageObjects/PageObjectManager';
+//json -> string(using JSON.stringify() method) -> JSObject - to avoid ecoding related issues
+
+const dataset = JSON.parse(JSON.stringify(require("../utils/placeOrderTestData.json")));//converts JSON into Js object
 
 
 test("E2E Scenario Test", async function ({ page }) {
@@ -26,20 +29,20 @@ test("E2E Scenario Test", async function ({ page }) {
 
 
     await loginPage.goTo();
-    await loginPage.validLogin(username, password);
+    await loginPage.validLogin(dataset.username, dataset.password);
 
-    await dashboardPage.addProductToCart(productName);
+    await dashboardPage.addProductToCart(dataset.productName);
     await dashboardPage.navigateToCart();
 
     const flag = await cartPage.verifyProductVisible();
     await expect(flag).toBeTruthy();
     await cartPage.goToCheckoutPage();
 
-    await checkoutPage.selectCountry(countryText, expectedCountry);
-    await expect(checkoutPage.checkoutEmail).toHaveText(username);
+    await checkoutPage.selectCountry(dataset.countryText, dataset.expectedCountry);
+    await expect(checkoutPage.checkoutEmail).toHaveText(dataset.username);
     await checkoutPage.placeOrder();
 
-    await expect(thankyouPage.getThankyouLocator()).toHaveText(thankyouText);
+    await expect(thankyouPage.getThankyouLocator()).toHaveText(dataset.thankyouText);
     const orderId = await thankyouPage.getOrderId();
 
     await thankyouPage.goToMyOrdersPage();
